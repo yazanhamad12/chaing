@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <script>
+        function convertCurrency() {
+            var price = parseFloat(document.getElementById("price").value);
+            var currency = document.getElementsByName("d")[0].value;
+            var convertedPrice;
+
+            // Example conversion rates
+            var rates = {
+                "dolar": 3.5,  // Example rate: 1 USD = 3.5 NIS
+                "nis": 1,      // Example rate: 1 NIS = 1 NIS
+                "jd": 5        // Example rate: 1 JD = 5 NIS
+            };
+
+            if (!isNaN(price) && rates[currency] !== undefined) {
+                convertedPrice = price * rates[currency];
+                document.getElementById("result").innerText = "The change is " + convertedPrice.toFixed(2);
+            } else {
+                document.getElementById("result").innerText = "Please enter a valid price and select a currency.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Convert</h1>
+    <form onsubmit="event.preventDefault(); convertCurrency();">
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price"><br><br>
+        <select name="d">
+          <option value="dolar">Dollar</option>
+          <option value="nis">NIS</option>
+          <option value="jd">JD</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Convert">
+    </form>
+    <br>
+    <p id="result">The change is </p>
+</body>
+</html>
